@@ -8,7 +8,12 @@ export const postRouter = router({
   getAll: publicProcedure
     .query(async () => {
       const data = await prisma.post.findMany()
-      return data
+      // By parsing the data our returned data, we can ensure its being returned to our client as expected
+      // In the case with this application, we're using zod to handle the `enum` of post.status.
+      // A db like Postgres could do this automatically with Prisma, but this example is using SQLite, which would accept any string.
+      // If you hover `data` above vs `parsedData` below, you'll see that `status` is correctly typed as a union (or "enum" in this case)
+      const parsedData = data.map(d => PostSchema.parse(d))
+      return parsedData
     }),
   //
   getById: publicProcedure
@@ -27,7 +32,8 @@ export const postRouter = router({
           message: `No post with id '${where.id}'`,
         })
       }
-      return data
+      // See comment about parsing above
+      return PostSchema.parse(data)
     }),
   //
   create: publicProcedure
@@ -45,6 +51,7 @@ export const postRouter = router({
       const data = await prisma.post.create({
         data: payload
       })
+      // See comment about parsing above
       return PostSchema.parse(data)
     }),
   //
@@ -67,6 +74,7 @@ export const postRouter = router({
           message: `No block with id '${where.id}'`,
         })
       }
-      return data
+      // See comment about parsing above
+      return PostSchema.parse(data)
     })
 })
