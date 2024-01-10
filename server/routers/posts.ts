@@ -39,7 +39,7 @@ export const postRouter = router({
           updatedAt: true
         })
       })
-    ).output(PostSchema)
+    )
     .mutation(async ({ input }) => {
       const { payload } = input
       const data = await prisma.post.create({
