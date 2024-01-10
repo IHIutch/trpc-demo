@@ -18,6 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## File Structure
 
+```
 .
 ├── app  # <-- this is where the Next.js application lives
 │   └── api/trpc/[trpc]/route.ts # <-- this is the dynamic tRPC HTTP handler
@@ -45,3 +46,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 |   └── zod
 |       └── schema.ts  # <-- where the zod schemas are defined
 └── [..]
+```
