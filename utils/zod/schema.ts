@@ -9,9 +9,3 @@ export const PostSchema = z.object({
   isFeatured: z.coerce.boolean(),
   status: z.enum(PostOptions),
 })
-
-export const CreatePostSchema = PostSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true
-})

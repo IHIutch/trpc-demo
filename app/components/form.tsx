@@ -51,7 +51,7 @@ export default function Form() {
         <select onChange={(e) => setStatus(e.target.value as Option)} id="status" name='status' required>
           <option>-- Choose --</option>
           {PostOptions.map(opt => (
-            <option key={opt} value={opt}>Draft</option>
+            <option key={opt} value={opt}>{opt}</option>
           ))}
         </select>
       </div>

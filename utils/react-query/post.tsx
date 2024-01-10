@@ -1,9 +1,12 @@
-import { type z } from "zod"
 import { trpc } from "../trpc/client"
-import { type CreatePostSchema } from "../zod/schema"
+import { type RouterInputs, type RouterOutputs } from "@/server"
 
-export const useGetAllPosts = () => {
-  const { isLoading, isError, isSuccess, data, error } = trpc.post.getAll.useQuery()
+export const useGetAllPosts = ({ initialData }: { initialData?: RouterOutputs['post']['getAll'] }) => {
+  const { isLoading, isError, isSuccess, data, error } = trpc.post.getAll.useQuery(undefined, {
+    initialData,
+    refetchOnMount: initialData ? false : true // If we have "initialData", we can skip refetchOnMount, otherwise we want to fetch as soon as the component is mounted
+    // Be careful doing this. The above ternary only works because initialData is set on the server. We wouldn't be able to do this in an SPA environment
+  })
   return {
     data,
     error,
@@ -13,13 +16,11 @@ export const useGetAllPosts = () => {
   }
 }
 
-type PayloadType = z.infer<typeof CreatePostSchema>
-
 export const useCreatePost = () => {
   const { post: postUtils } = trpc.useUtils()
   const { mutateAsync, isLoading, isError, isSuccess, data, error } =
     trpc.post.create.useMutation({
-      onMutate: async ({ payload }: { payload: PayloadType }) => {
+      onMutate: async ({ payload }: { payload: RouterInputs['post']['create']['payload'] }) => {
         // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
         await postUtils.getAll.cancel()
         // Store the 'stale' data in case our request fails
@@ -50,9 +51,9 @@ export const useCreatePost = () => {
           context?.previous
         )
       },
-      // Always refetch after error or success:
+      // Always refetch after error or success
       onSettled: () => {
-        // By invalidating the cache, we'll fetch the latest data, getting the true id, createdAt, updatedAt fields
+        // By invalidating the cache, we'll automatically refetch the latest data
         postUtils.getAll.invalidate()
       },
     })

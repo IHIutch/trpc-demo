@@ -1,4 +1,5 @@
 'use client'
+// using 'use client' because these are client side providers
 
 import * as React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
