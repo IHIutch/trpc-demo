@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from "../../utils/trpc";
 import { PostSchema } from "@/utils/zod/schema";
-import { prisma } from "../prisma";
 import { TRPCError } from "@trpc/server";
+import { prisma } from "@/utils/prisma";
 
 export const postRouter = router({
   getAll: publicProcedure
@@ -10,6 +10,7 @@ export const postRouter = router({
       const data = await prisma.post.findMany()
       return data
     }),
+  //
   getById: publicProcedure
     .input(
       z.object({
@@ -28,6 +29,7 @@ export const postRouter = router({
       }
       return data
     }),
+  //
   create: publicProcedure
     .input(
       z.object({
@@ -37,14 +39,15 @@ export const postRouter = router({
           updatedAt: true
         })
       })
-    )
+    ).output(PostSchema)
     .mutation(async ({ input }) => {
       const { payload } = input
       const data = await prisma.post.create({
         data: payload
       })
-      return data
+      return PostSchema.parse(data)
     }),
+  //
   update: publicProcedure
     .input(
       z.object({
