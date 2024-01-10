@@ -54,3 +54,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [React Query (v4)](https://tanstack.com/query/v4/docs/react/overview)
 - [Zod](https://zod.dev/)
 - [Prisma](https://www.prisma.io/nextjs)
+- [SuperJSON](https://trpc.io/docs/server/data-transformers#using-superjson)

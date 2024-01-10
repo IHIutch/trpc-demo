@@ -35,6 +35,7 @@ export default function TrpcProvider({ children }: { children: React.ReactNode }
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
+      // Using SuperJSON to serialize challenging JS data types
       transformer: SuperJSON,
     }),
   );

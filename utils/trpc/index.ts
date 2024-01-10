@@ -6,6 +6,7 @@ import SuperJSON from 'superjson';
 // For instance, the use of a t variable
 // is common in i18n libraries.
 const t = initTRPC.create({
+  // Using SuperJSON to serialize challenging JS data types
   transformer: SuperJSON
 });
 
