@@ -1,5 +1,5 @@
 {
-  "name": "trpc-demo",
+  "name": "test",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,31 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "5.7.1",
-    "@tanstack/react-query": "^4.0.0",
-    "@tanstack/react-query-devtools": "^4.36.1",
-    "@trpc/client": "^10.45.0",
-    "@trpc/next": "^10.45.0",
-    "@trpc/react-query": "^10.45.0",
-    "@trpc/server": "^10.45.0",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@prisma/client": "^5.8.1",
+    "@tanstack/react-query": "^5.17.19",
+    "@tanstack/react-query-devtools": "^5.17.21",
+    "@trpc/client": "11.0.0-next-beta.228",
+    "@trpc/react-query": "11.0.0-next-beta.228",
+    "@trpc/server": "11.0.0-next-beta.228",
     "next": "14.0.4",
-    "prisma": "^5.7.1",
+    "prisma": "^5.8.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.3",
     "superjson": "^2.2.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
 }
